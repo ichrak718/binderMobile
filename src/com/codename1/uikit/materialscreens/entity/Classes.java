@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.codename1.uikit.materialscreens.entity; 
+package com.codename1.uikit.materialscreens.entity;
 
 /**
  *
  * @author Asus
  */
 public class Classes {
-  private int id;
-  private String nameClass;
-   private String session;
+
+    private int id;
+    private String nameClass;
+    private String session;
 
     public Classes() {
     }
@@ -21,31 +22,17 @@ public class Classes {
         this.id = id;
     }
 
-
-
     public Classes(int id, String nameClass, String session) {
         this.id = id;
         this.nameClass = nameClass;
         this.session = session;
 
-
     }
-
-
-    
-
-
-    
-
 
     public Classes(String nameClass, String session) {
-       this.nameClass = nameClass;
+        this.nameClass = nameClass;
         this.session = session;
     }
-
-
-
-
 
     public int getId() {
         return id;
@@ -75,10 +62,5 @@ public class Classes {
     public String toString() {
         return "Classes{" + "id=" + id + ", nameClass=" + nameClass + ", session=" + session + '}';
     }
-
-
-
-    
-
 
 }

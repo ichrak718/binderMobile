@@ -41,11 +41,12 @@ public class ProfilForm extends Form {
     private Resources res = UIManager.initFirstTheme("/theme");
     private final Container mainContainer;
 
-Form f = new Form();
-    public ProfilForm(Integer id ,String fullName,String birthday , String email,Integer classes , Integer id_user) {
-        
+    Form f = new Form();
+
+    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user) {
+
         super(BoxLayout.y());
-      
+
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
         Image profilePic = res.getImage("user.jpg");
@@ -53,58 +54,56 @@ Form f = new Form();
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
         Label profilePicLabel = new Label(profilePic, "ProfilePicTitle");
         profilePicLabel.setMask(mask.createMask());
-
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
         menuButton.addActionListener(e -> getToolbar().openSideMenu());
-        
         Container remainingTasks = BoxLayout.encloseY(
-                        new Label("12", "CenterTitle"),
-                        new Label("remaining tasks", "CenterSubTitle")
-                );
+                new Label("12", "CenterTitle"),
+                new Label("remaining tasks", "CenterSubTitle")
+        );
         remainingTasks.setUIID("RemainingTasks");
 
-
         Container titleCmp = BoxLayout.encloseY(
-                        FlowLayout.encloseIn(menuButton),
-                        BorderLayout.centerAbsolute(
-                                BoxLayout.encloseY(
-                                    new Label( ""+fullName, "Title")
-                                )
-                            ).add(BorderLayout.WEST, profilePicLabel)
-                );
-        
+                FlowLayout.encloseIn(menuButton),
+                BorderLayout.centerAbsolute(
+                        BoxLayout.encloseY(
+                                //*************************************
+                                new Label("" + fullName, "Title")
+                        )
+                ).add(BorderLayout.WEST, profilePicLabel)
+        );
+        //*******************************************************
         FloatingActionButton fab = FloatingActionButton.createBadge("");
         fab.setVisible(false);
         //fab.getAllStyles().setMarginUnit(Style.UNIT_TYPE_PIXELS);
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
-    
-       // add(new Label("Today", "TodayTitle"));
+        // add(new Label("Today", "TodayTitle"));
         /*
-        FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);
-        
+        FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);  
         addButtonBottom(arrowDown, "Finish landing page concept", 0xd997f1, true);
         addButtonBottom(arrowDown, "Design app illustrations", 0x5ae29d, false);
         addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
         addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);*/
+
+        //*******************************************************************
         mainContainer = new Container();
-        mainContainer.setLayout(new GridLayout(8,2));
-        
+        mainContainer.setLayout(new GridLayout(8, 2));
+
         Label name = new Label("Name:");
-        
+
         name.getUnselectedStyle().setFgColor(39321);
         Font name_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
-        
+
         Label nameA = new Label(fullName);
-        
+
         nameA.getUnselectedStyle().setFgColor(8482);
         Font name_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
         mainContainer.add(name);
         mainContainer.add(nameA);
-        
-         Label birthdayLabel = new Label("Birthday:");
+
+        Label birthdayLabel = new Label("Birthday:");
         birthdayLabel.getUnselectedStyle().setFgColor(39321);
         Font birthday_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
         Label birthdayA = new Label(birthday);
@@ -120,28 +119,38 @@ Form f = new Form();
         Font email_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
         mainContainer.add(emailLabel);
         mainContainer.add(emailA);
-        add(mainContainer);
 
-        setupSideMenu(id_user,fullName);
+        Label classLabel = new Label("Class:");
+        classLabel.getUnselectedStyle().setFgColor(39321);
+        Font class_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+        Label classA = new Label(classes);
+        classA.getUnselectedStyle().setFgColor(8482);
+        Font class_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
+        mainContainer.add(classLabel);
+        mainContainer.add(classA);
+
+        add(mainContainer);
+//****************************************************************
+        setupSideMenu(id_user, fullName);
     }
-    
+
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
         MultiButton finishLandingPage = new MultiButton(text);
         finishLandingPage.setEmblem(arrowDown);
         finishLandingPage.setUIID("Container");
         finishLandingPage.setUIIDLine1("TodayEntry");
-        finishLandingPage.setIcon(createCircleLine(color, finishLandingPage.getPreferredH(),  first));
+        finishLandingPage.setIcon(createCircleLine(color, finishLandingPage.getPreferredH(), first));
         finishLandingPage.setIconUIID("Container");
         add(FlowLayout.encloseIn(finishLandingPage));
     }
-    
+
     private Image createCircleLine(int color, int height, boolean first) {
         Image img = Image.createImage(height, height, 0);
         Graphics g = img.getGraphics();
         g.setAntiAliased(true);
         g.setColor(0xcccccc);
         int y = 0;
-        if(first) {
+        if (first) {
             y = height / 6 + 1;
         }
         g.drawLine(height / 2, y, height / 2, height);
@@ -150,9 +159,9 @@ Form f = new Form();
         g.fillArc(height / 2 - height / 4, height / 6, height / 2, height / 2, 0, 360);
         return img;
     }
+//*********************************************************************************
 
-
-       public void setupSideMenu(Integer id,String fullname) {
+    public void setupSideMenu(Integer id, String fullname) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -162,14 +171,14 @@ Form f = new Form();
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
-        
+
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD,  e ->new ServicePupil().ServicePupilR(id));
-        getToolbar().addMaterialCommandToSideMenu("  Classe", FontImage.MATERIAL_TRENDING_UP,  e ->new ServiceClasses().findAllClasses() );
+        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id));
+        //  getToolbar().addMaterialCommandToSideMenu("  Classe", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceClasses().ServiceClassesR(id_class,id));
         //getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-      //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+
     }
-       
 
 }

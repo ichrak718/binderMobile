@@ -98,14 +98,20 @@ public class LoginForm extends Form {
         loginButton.setUIID("LoginButton");
         Label err = new Label("Check email and password", "erreur");
         err.setVisible(false);
-        //*********************************************
+        
+        
+        
+        //****************************************************************************************
         loginButton.addActionListener(e -> {
 
           new ServiceFosUser().login(login.getText().toString(),password.getText().toString());
  
         });
-
-        // We remove the extra space for low resolution devices so things fit better
+        //*****************************************************************************************
+        
+        
+        
+        
         Label spaceLabel;
         if (!Display.getInstance().isTablet() && Display.getInstance().getDeviceDensity() < Display.DENSITY_VERY_HIGH) {
             spaceLabel = new Label();
