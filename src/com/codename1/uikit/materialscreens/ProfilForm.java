@@ -30,6 +30,7 @@ import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.Classes;
 import com.codename1.uikit.materialscreens.service.ServiceClasses;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
+import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 import com.esprit.binder.utils.Statics;
 
 /**
@@ -43,7 +44,7 @@ public class ProfilForm extends Form {
 
     Form f = new Form();
 
-    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user) {
+    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user,Integer id_class) {
 
         super(BoxLayout.y());
 
@@ -131,7 +132,7 @@ public class ProfilForm extends Form {
 
         add(mainContainer);
 //****************************************************************
-        setupSideMenu(id_user, fullName);
+        setupSideMenu(id_user, fullName,id_class);
     }
 
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
@@ -161,7 +162,7 @@ public class ProfilForm extends Form {
     }
 //*********************************************************************************
 
-    public void setupSideMenu(Integer id, String fullname) {
+    public void setupSideMenu(Integer id, String fullname, Integer id_class) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -174,7 +175,7 @@ public class ProfilForm extends Form {
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id));
-        //  getToolbar().addMaterialCommandToSideMenu("  Classe", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceClasses().ServiceClassesR(id_class,id));
+        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class,id ));
         //getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
         //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());

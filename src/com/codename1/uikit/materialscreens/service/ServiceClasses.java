@@ -64,7 +64,7 @@ public class ServiceClasses {
 
                     }
 
-                    new ProfilForm(idPupil, fullName, birthday, email, classe.getNameClass(), id_user).show();
+                    new ProfilForm(idPupil, fullName, birthday, email, classe.getNameClass(), id_user,id_class).show();
                 } catch (IOException ex) {
                 }
             }
