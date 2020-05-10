@@ -44,7 +44,7 @@ public class ProfilForm extends Form {
 
     Form f = new Form();
 
-    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user,Integer id_class) {
+    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user, Integer id_class, String role) {
 
         super(BoxLayout.y());
 
@@ -132,7 +132,7 @@ public class ProfilForm extends Form {
 
         add(mainContainer);
 //****************************************************************
-        setupSideMenu(id_user, fullName,id_class);
+        setupSideMenu(id_user, fullName, id_class, role);
     }
 
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
@@ -162,7 +162,7 @@ public class ProfilForm extends Form {
     }
 //*********************************************************************************
 
-    public void setupSideMenu(Integer id, String fullname, Integer id_class) {
+    public void setupSideMenu(Integer id, String fullname, Integer id_class, String role) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -172,12 +172,19 @@ public class ProfilForm extends Form {
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
-
+        System.out.println(role);
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id));
-        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class,id ));
-        //getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-        //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
+        if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
+            getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id, role));
+            getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id, role));
+        }
+        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
+           }
+        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+             }
+        
+          
+        
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }

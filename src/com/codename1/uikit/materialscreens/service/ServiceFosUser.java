@@ -53,16 +53,29 @@ public class ServiceFosUser {
                         list.clear();
 //******************************
                         for (Map<String, Object> obj : content) {
-                            list.add(new FOSUser(Integer.parseInt((String) obj.get("id"))));
+                            list.add(new FOSUser(Integer.parseInt((String) obj.get("id")), (String) obj.get("roles")));
                             fos.setId(Integer.parseInt((String) obj.get("id")));
+                            fos.setRole((String) obj.get("roles"));
+                            System.out.println(fos.getRole());
 
                         }
 
                         System.out.println(fos.getId());
+                        /////////////////////////////////////
+                        //si el user pupil 
 
-                        //*****************************
-                        new ServicePupil().ServicePupilR(fos.getId());
-                        //******************************
+                        if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
+                            new ServicePupil().ServicePupilR(fos.getId(), fos.getRole());
+                        }
+                        //si el user parent
+                        if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+                            System.out.println("welcom parent");
+                        }
+                        //si el user teacher
+                        if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
+                        System.out.println("welcom teacher");
+
+                        }
                     } catch (IOException ex) {
                         System.out.println(ex);
                     }

@@ -19,38 +19,23 @@
 package com.codename1.uikit.materialscreens;
 
 import com.codename1.io.ConnectionRequest;
-import com.codename1.io.JSONParser;
-import com.codename1.io.Log;
-import com.codename1.io.NetworkEvent;
-import com.codename1.io.NetworkManager;
+
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
-import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
-import com.codename1.ui.Toolbar;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.FOSUser;
-import com.codename1.uikit.materialscreens.entity.Pupils;
 import com.codename1.uikit.materialscreens.service.ServiceFosUser;
-import com.codename1.uikit.materialscreens.service.ServiceClasses;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The Login form

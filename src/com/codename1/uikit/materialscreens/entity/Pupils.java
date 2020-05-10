@@ -18,7 +18,6 @@ public class Pupils {
   private String birthday;
   private int classes;
   private int user_id;
-    public static FOSUser current_user = new FOSUser(1);
   
 
     public Pupils() {

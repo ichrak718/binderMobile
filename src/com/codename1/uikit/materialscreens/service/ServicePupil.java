@@ -36,7 +36,7 @@ public class ServicePupil {
     public ServicePupil() {
     }
 
-    public void ServicePupilR(Integer id) {
+    public void ServicePupilR(Integer id,String role) {
 
         conx = new ConnectionRequest("http://localhost/mobile/readPupil.php?id_user=" + id);
         conx.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -64,7 +64,7 @@ public class ServicePupil {
 
                     }
                     System.out.println(p.getFullname());
-                    new ServiceClasses(p.getClasses(), p.getFullname(), p.getBirthday(), p.getEmail(), p.getUser_id(), p.getId());
+                    new ServiceClasses(p.getClasses(), p.getFullname(), p.getBirthday(), p.getEmail(), p.getUser_id(), p.getId(),role);
                     //  new ProfilForm(p.getId(), p.getFullname(), p.getBirthday(), p.getEmail(), p.getClasses(), p.getUser_id()).show();
 
                 } catch (IOException ex) {

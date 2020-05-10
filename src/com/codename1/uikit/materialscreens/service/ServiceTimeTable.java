@@ -34,7 +34,7 @@ public class ServiceTimeTable {
     List<TimeTable> tList = new ArrayList<>();
     TimeTable t;
 
-    public ServiceTimeTable(Integer id_class, Integer id_user) {
+    public ServiceTimeTable(Integer id_class, Integer id_user,String role) {
 
         conx = new ConnectionRequest("http://localhost/mobile/readT.php?classe=" + id_class);
         conx.addResponseListener(new ActionListener<NetworkEvent>() {
@@ -59,7 +59,7 @@ public class ServiceTimeTable {
                     }
 
                     System.out.println(timeTable.getId() + timeTable.getId_class() + timeTable.getPdf() + id_user);
-                    new TimeTableForm(timeTable.getId(), timeTable.getId_class(), timeTable.getPdf(), id_user).show();
+                    new TimeTableForm(timeTable.getId(), timeTable.getId_class(), timeTable.getPdf(), id_user,role).show();
                 } catch (IOException ex) {
                 }
             }

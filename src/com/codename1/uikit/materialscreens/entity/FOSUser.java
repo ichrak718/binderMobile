@@ -48,9 +48,11 @@ public class FOSUser implements Serializable{
         this.valid = valid;
     }
 
-    public FOSUser(Integer id) {
+    public FOSUser(Integer id, String role) {
         this.id = id;
+        this.role = role;
     }
+
     
 
     

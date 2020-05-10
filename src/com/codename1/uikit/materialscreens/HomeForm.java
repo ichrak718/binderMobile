@@ -154,7 +154,7 @@ public class HomeForm extends Form {
         sidemenuTop.setUIID("SidemenuTop");
 
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id));
+      //  getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id));
       //  getToolbar().addMaterialCommandToSideMenu("  Classe", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceClasses().findAllClasses());
         //getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
         //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));

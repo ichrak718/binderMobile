@@ -40,7 +40,6 @@ import com.esprit.binder.utils.Statics;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 /**
  *
  * @author Asus
@@ -52,7 +51,7 @@ public class TimeTableForm extends Form {
 
     Form f = new Form();
 
-    public TimeTableForm(Integer id, Integer class_id, String pdf, Integer id_user) {
+    public TimeTableForm(Integer id, Integer class_id, String pdf, Integer id_user, String role) {
 
         super(BoxLayout.y());
 
@@ -105,47 +104,26 @@ public class TimeTableForm extends Form {
         Font name_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
 
         mainContainer.add(name);
-        
-        /*
+
         Button pdfBtn = new Button("Download");
-        
-        
+
         pdfBtn.addActionListener(e -> {
             FileSystemStorage fs = FileSystemStorage.getInstance();
-            String fileName = fs.getAppHomePath() + "pdf-sample.pdf";
+            String fileName = fs.getAppHomePath() + "time_table.pdf";
             if (!fs.exists(fileName)) {
-                    Util.downloadUrlToFile("file:///"+pdf, fileName, true);
+                Util.downloadUrlToFile("file:///" + pdf, fileName, true);
 
-              
             }
             try {
                 fs.openOutputStream(fileName);
             } catch (IOException ex) {
             }
         });
-        mainContainer.add(pdfBtn);*/
-        Button bt = new Button("Download");
-        bt.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            OutputStream stream = null;
-            try {
-                FileSystemStorage fs = FileSystemStorage.getInstance();
-                stream = fs.openOutputStream(FileSystemStorage.getInstance().getAppHomePath()+"asma.csv");
-                String entete = "Subject;Grade;Teacher\n";
-                String infos = ""+class_id+";"+id+";"+id_user+"\n";
-                stream.write(entete.getBytes());
-                stream.write(infos.getBytes());
-                stream.close();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    });
-        mainContainer.add(bt);
+        mainContainer.add(pdfBtn);
+
         add(mainContainer);
 //****************************************************************
-        setupSideMenu(id, id_user, class_id);
+        setupSideMenu(id, id_user, class_id, role);
     }
 
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
@@ -175,7 +153,7 @@ public class TimeTableForm extends Form {
     }
 //*********************************************************************************
 
-    public void setupSideMenu(Integer id, Integer id_user, Integer class_id) {
+    public void setupSideMenu(Integer id, Integer id_user, Integer class_id, String role) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -185,13 +163,22 @@ public class TimeTableForm extends Form {
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
-
+        System.out.println(role);
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user));
-        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user));
-        //getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_ACCESS_TIME,  e -> showOtherForm(res));
-        //  getToolbar().addMaterialCommandToSideMenu("  Account Settings", FontImage.MATERIAL_SETTINGS,  e -> showOtherForm(res));
-        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        
+          if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
+            getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user, role));
+        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
+        }
+          ////////////////////////////////
+        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
+           }
+        
+        /////////////////////////////////////////
+        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+             }
+
+           getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }
 
