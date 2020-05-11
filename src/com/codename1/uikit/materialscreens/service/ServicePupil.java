@@ -75,42 +75,6 @@ public class ServicePupil {
 
     }
 
-    public List<Pupils> ServiceReadPupilC(Integer id) {
-
-        conx = new ConnectionRequest("http://localhost/mobile/readP.php?classes=" + id);
-        conx.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                String json = new String(conx.getResponseData());
-
-                Map<String, Object> u;
-                try {
-                    JSONParser j = new JSONParser();
-                    u = j.parseJSON(new CharArrayReader(json.toCharArray()));
-
-                    List<Map<String, Object>> content = (List<Map<String, Object>>) u.get("root");
-                    pupil.clear();
-
-                    for (Map<String, Object> obj : content) {
-                        // pupil.add(new Pupils(Integer.parseInt((String) obj.get("id")), (String) obj.get("fullname"), (String) obj.get("birthday"), (String) obj.get("email"), Integer.parseInt((String) obj.get("classes")), Integer.parseInt((String) obj.get("id_user"))));
-                        p.setId(Integer.parseInt((String) obj.get("id")));
-                        p.setFullname((String) obj.get("fullname"));
-                        p.setBirthday((String) obj.get("birthday"));
-                        p.setEmail((String) obj.get("email"));
-                        p.setClasses(Integer.parseInt((String) obj.get("classes")));
-
-                        p.setUser_id(Integer.parseInt((String) obj.get("id_user")));
-                        pupil.add(p);
-
-                    }
-
-                } catch (IOException ex) {
-                }
-            }
-        });
-        NetworkManager.getInstance().addToQueue(conx);
-
-        return pupil;
-    }
-
+    
+    
 }

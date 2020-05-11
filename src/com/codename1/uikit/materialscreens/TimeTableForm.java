@@ -13,6 +13,7 @@ import com.codename1.ui.Button;
 import static com.codename1.ui.Component.BOTTOM;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
@@ -20,25 +21,17 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.layouts.Layout;
-import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
-import com.codename1.uikit.materialscreens.entity.Classes;
-import com.codename1.uikit.materialscreens.service.ServiceClasses;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
-import com.esprit.binder.utils.Statics;
+import com.codename1.util.StringUtil;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  *
@@ -48,7 +41,7 @@ public class TimeTableForm extends Form {
 
     private Resources res = UIManager.initFirstTheme("/theme");
     private final Container mainContainer;
-
+String maChaine;
     Form f = new Form();
 
     public TimeTableForm(Integer id, Integer class_id, String pdf, Integer id_user, String role) {
@@ -104,20 +97,20 @@ public class TimeTableForm extends Form {
         Font name_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
 
         mainContainer.add(name);
-
+        System.out.println(pdf+"charfa");
         Button pdfBtn = new Button("Download");
-
+                 String result = StringUtil.replaceAll(pdf, "C:\\XAMPP\\htdocs\\", "http://localhost/");
+        System.out.println(result+"good");
         pdfBtn.addActionListener(e -> {
+          
             FileSystemStorage fs = FileSystemStorage.getInstance();
-            String fileName = fs.getAppHomePath() + "time_table.pdf";
-            if (!fs.exists(fileName)) {
-                Util.downloadUrlToFile("file:///" + pdf, fileName, true);
+            String fileName = fs.getAppHomePath() + "timetable.pdf";
+                Util.downloadUrlToStorage(result, fileName, true);  
+                Display.getInstance().execute(fileName);
+                Dialog.show("success", "", "Ok", null);
+           
 
-            }
-            try {
-                fs.openOutputStream(fileName);
-            } catch (IOException ex) {
-            }
+
         });
         mainContainer.add(pdfBtn);
 
@@ -165,20 +158,17 @@ public class TimeTableForm extends Form {
         sidemenuTop.setUIID("SidemenuTop");
         System.out.println(role);
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        
-          if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
-            getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user, role));
-        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
-        }
-          ////////////////////////////////
-        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
-           }
-        
-        /////////////////////////////////////////
-        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
-             }
 
-           getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
+        if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
+            getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user, role));
+            getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
+        } ////////////////////////////////
+        else if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
+        } /////////////////////////////////////////
+        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+        }
+
+        getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }
 

@@ -17,21 +17,15 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
-import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.layouts.Layout;
-import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
-import com.codename1.uikit.materialscreens.entity.Classes;
-import com.codename1.uikit.materialscreens.service.ServiceClasses;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
-import com.esprit.binder.utils.Statics;
 
 /**
  *
@@ -131,6 +125,8 @@ public class ProfilForm extends Form {
         mainContainer.add(classA);
 
         add(mainContainer);
+        
+       
 //****************************************************************
         setupSideMenu(id_user, fullName, id_class, role);
     }
