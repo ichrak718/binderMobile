@@ -162,12 +162,22 @@ String maChaine;
         if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
             getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user, role));
             getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
-        } ////////////////////////////////
-        else if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
-        } /////////////////////////////////////////
-        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+          getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
+            
+           getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(class_id,id_user,role).show() );
+           getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(class_id,id_user,role).show());
         }
+        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
+                       getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
 
+            
+           }
+        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+            
+           getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
+                }
+        
+            
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }

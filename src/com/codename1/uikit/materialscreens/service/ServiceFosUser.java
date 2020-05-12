@@ -8,6 +8,7 @@ package com.codename1.uikit.materialscreens.service;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
+import static com.codename1.io.Log.p;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Form;
@@ -18,7 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import com.codename1.ui.util.Resources;
+import com.codename1.uikit.materialscreens.WelcomeTeacher;
 import com.codename1.uikit.materialscreens.entity.Pupils;
+import com.codename1.uikit.materialscreens.entity.participation;
 
 /**
  *
@@ -32,6 +35,7 @@ public class ServiceFosUser {
     String login;
     Resources theme;
     FOSUser fos = new FOSUser();
+    participation p;
 
     public void login(String email, String password) {
         List<FOSUser> list = new ArrayList<>();
@@ -71,10 +75,12 @@ public class ServiceFosUser {
                         //si el user parent
                         if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
                             System.out.println("welcom parent");
+                            
                         }
                         //si el user teacher
                         if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
                         System.out.println("welcom teacher");
+                        new WelcomeTeacher().show();
 
                         }
                     } catch (IOException ex) {
