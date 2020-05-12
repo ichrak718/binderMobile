@@ -178,7 +178,13 @@ public class WelcomePupil extends Form {
             
            getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(id_class,id,role).show() );
            getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(id_class,id,role).show());
+      
         }
+        
+        
+        
+        
+        
         else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
                        getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
 
@@ -192,7 +198,6 @@ public class WelcomePupil extends Form {
             
          
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
-
     }
 
 }

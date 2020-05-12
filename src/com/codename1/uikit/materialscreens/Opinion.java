@@ -106,7 +106,7 @@ public class Opinion extends Form {
         btnRetour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                 new  ServicePupil().ServicePupilR(id_user, role);
+              new  ServicePupil().ServicePupilR(id_user,role);
             }
         });
 

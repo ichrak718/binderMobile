@@ -12,12 +12,9 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionListener;
-import com.codename1.uikit.materialscreens.WelcomePupil;
 import com.codename1.uikit.materialscreens.entity.Parent;
 import com.codename1.uikit.materialscreens.entity.Pupils;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

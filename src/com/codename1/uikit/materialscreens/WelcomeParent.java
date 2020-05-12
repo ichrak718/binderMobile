@@ -106,7 +106,7 @@ public class WelcomeParent extends Form {
         Label pupilLabel = new Label("Pupil Name:");
         pupilLabel.getUnselectedStyle().setFgColor(39321);
         Font email_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
-        Label pupilA = new Label(name);
+        Label pupilA = new Label(namePupil);
         pupilA.getUnselectedStyle().setFgColor(8482);
         Font email_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
         mainContainer.add(pupilLabel);
