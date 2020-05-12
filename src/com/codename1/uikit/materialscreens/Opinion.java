@@ -97,7 +97,7 @@ public class Opinion extends Form {
         });
         
         
-        btnRetour = new Button("Home");
+        btnRetour = new Button("Go To Home");
         
         Op.add(btnRetour);
         
@@ -106,7 +106,7 @@ public class Opinion extends Form {
         btnRetour.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-             //new ProfilForm((Integer) id, (String) fullName, (String) birthday, (String) email, (String) classes, (Integer) id_user, (Integer) id_class, (String) role).show();
+                 new  ServicePupil().ServicePupilR(id_user, role);
             }
         });
 

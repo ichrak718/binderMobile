@@ -109,7 +109,7 @@ public class ClubSignUp extends Form {
         });
 
         
-        btnRetour = new Button("Home");
+        btnRetour = new Button("Go to Home");
         
         signup.add(btnRetour);
         
