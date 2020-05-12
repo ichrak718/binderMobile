@@ -74,8 +74,7 @@ public class ServiceFosUser {
                         }
                         //si el user parent
                         if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
-                            System.out.println("welcom parent");
-                            
+                        new ServiceParent().ServiceParent(fos.getId(), fos.getRole());
                         }
                         //si el user teacher
                         if (fos.getRole().equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {

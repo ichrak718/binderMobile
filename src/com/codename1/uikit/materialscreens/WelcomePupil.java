@@ -31,14 +31,14 @@ import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
  *
  * @author Asus
  */
-public class ProfilForm extends Form {
+public class WelcomePupil extends Form {
 
     private Resources res = UIManager.initFirstTheme("/theme");
     private final Container mainContainer;
 
     Form f = new Form();
 
-    public ProfilForm(Integer id, String fullName, String birthday, String email, String classes, Integer id_user, Integer id_class, String role) {
+    public WelcomePupil(Integer id, String fullName, String birthday, String email, String classes, Integer id_user, Integer id_class, String role) {
 
         super(BoxLayout.y());
 

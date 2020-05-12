@@ -23,6 +23,7 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.activity;
+import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 
@@ -157,6 +158,7 @@ setupSideMenu(id_user, id_class, role);
      public ActivityForm(Integer id,String about,String location,String duration,String dateA,String clubAC,Integer club_id){
         
          super(BoxLayout.y());
+            System.out.println(id);
 
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
@@ -317,15 +319,13 @@ setupSideMenu();
            
            getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(id_class,id,role).show());
         }
-        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
-             getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
-            
-            }
+
         else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
              
            
-           getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(id_class,id,role).show());
-             }
+        getToolbar().addMaterialCommandToSideMenu(" Profil", FontImage.MATERIAL_TOYS, e -> new ServiceParent().ServiceParent(id, role));
+           getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
+        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id, role));             }
         
           
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());

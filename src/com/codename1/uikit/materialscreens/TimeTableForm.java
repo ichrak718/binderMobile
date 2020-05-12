@@ -28,6 +28,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
+import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 import com.codename1.util.StringUtil;
@@ -118,6 +119,7 @@ String maChaine;
 //****************************************************************
         setupSideMenu(id, id_user, class_id, role);
     }
+    
 
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
         MultiButton finishLandingPage = new MultiButton(text);
@@ -159,27 +161,26 @@ String maChaine;
         System.out.println(role);
         getToolbar().addComponentToSideMenu(sidemenuTop);
 
-        if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
+ if (role.equals("a:1:{i:0;s:10:\"ROLE_PUPILS\";}")) {
             getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id_user, role));
             getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
-          getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
-            
+          getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());     
            getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(class_id,id_user,role).show() );
            getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(class_id,id_user,role).show());
-        }
-        else  if (role.equals("a:1:{i:0;s:10:\"ROLE_TEACHER\";}")) {
-                       getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
-
-            
-           }
-        else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
-            
-           getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());
-                }
+ }
+  else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
+             
+           
+        getToolbar().addMaterialCommandToSideMenu(" Profil", FontImage.MATERIAL_TOYS, e -> new ServiceParent().ServiceParent(id_user, role));
+           getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id_user,role).show());
+        getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));       
+  }
         
+          
+
+    
             
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }
-
 }

@@ -12,7 +12,7 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionListener;
-import com.codename1.uikit.materialscreens.ProfilForm;
+import com.codename1.uikit.materialscreens.WelcomePupil;
 import com.codename1.uikit.materialscreens.TimeTableForm;
 import com.codename1.uikit.materialscreens.entity.Classes;
 import com.codename1.uikit.materialscreens.entity.Pupils;

@@ -19,6 +19,7 @@ public class Pupils {
   private int classes;
   private int user_id;
   
+  
 
     public Pupils() {
     }
