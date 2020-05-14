@@ -22,7 +22,9 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.activity;
 import com.codename1.uikit.materialscreens.service.ClubDAO;
+import com.codename1.uikit.materialscreens.service.CourseDAO;
 import com.codename1.uikit.materialscreens.service.ServiceTeacher;
+import com.codename1.uikit.materialscreens.service.SubjectDAO;
 
 /**
  *
@@ -109,6 +111,8 @@ setupSideMenu();
         sidemenuTop.setUIID("SidemenuTop");
        
         getToolbar().addComponentToSideMenu(sidemenuTop);
+        getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCoursesT());
+        getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsT());
       
              getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm().show());
             

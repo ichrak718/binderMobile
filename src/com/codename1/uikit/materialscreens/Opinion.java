@@ -26,7 +26,6 @@ import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.OpinionDAO;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
-import javafx.scene.text.Text;
 
 /**
  *
