@@ -248,7 +248,7 @@ setupSideMenu(id_user, id_class, role);
         Font club_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_ITALIC, Font.SIZE_MEDIUM);
         mainContainer.add(clubLabel);
         mainContainer.add(clubA);
-        
+        //aaaaaaaaaaaaa
         
 
         add(mainContainer);
