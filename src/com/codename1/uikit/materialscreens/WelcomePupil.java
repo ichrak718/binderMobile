@@ -24,10 +24,13 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
+import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.service.NotificationService;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 import com.codename1.uikit.materialscreens.service.SubjectDAO;
+import com.codename1.uikit.materialscreens.service.SubjetService;
 
 /**
  *
@@ -194,7 +197,10 @@ public class WelcomePupil extends Form {
             getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsT());
                        getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
 
-            
+        //      getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
+        //   getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
+         
+             getToolbar().addMaterialCommandToSideMenu(" Subjects", FontImage.MATERIAL_TRENDING_UP, e -> new SubjetService().findAllSubjects(id,role));
            }
         else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
             

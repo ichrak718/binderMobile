@@ -21,8 +21,10 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.activity;
+import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.ClubDAO;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.service.NotificationService;
 import com.codename1.uikit.materialscreens.service.ServiceTeacher;
 import com.codename1.uikit.materialscreens.service.SubjectDAO;
 
@@ -116,7 +118,13 @@ setupSideMenu();
       
              getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm().show());
             
-            
+                getToolbar().addMaterialCommandToSideMenu(" Add Notification", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new AddNot().show() );
+
+             getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotifications());
+                       getToolbar().addMaterialCommandToSideMenu(" Add Abscense", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new AddAb().show() );
+
+             getToolbar().addMaterialCommandToSideMenu("  Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAllAbscenses());
+
       
         
           
