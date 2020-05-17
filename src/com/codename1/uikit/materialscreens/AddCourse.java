@@ -18,6 +18,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.uikit.materialscreens.entity.Course;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import static com.codename1.uikit.materialscreens.service.CourseDAO.listOfCourses;
 
 import com.esprit.binder.utils.Statics;
 import java.util.Map;
@@ -90,8 +91,9 @@ public class AddCourse extends Form{
             Course typedCourse = new Course(cbox.getSelectedItem().toString(),authorTf.getText(),categoryTf.getText());
             new  CourseDAO().addCourse(typedCourse);
             });
+        
         backBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
-            KitchenSink.mainForm.showBack();
+            listOfCourses.showBack();
             });
         this.add(BorderLayout.NORTH, mainContainer);
    }

@@ -5,17 +5,15 @@
  */
 package com.codename1.uikit.materialscreens.service;
 
-import com.codename1.components.WebBrowser;
+import com.codename1.components.FloatingActionButton;
+import com.codename1.components.ToastBar;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.Log;
 import com.codename1.io.NetworkManager;
-import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.TextArea;
-import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
@@ -25,19 +23,15 @@ import com.codename1.ui.plaf.UIManager;
 
 import java.io.IOException;
 import com.codename1.ui.TextField;
-import com.codename1.ui.events.DataChangedListener;
-import com.codename1.ui.events.SelectionListener;
 import com.codename1.uikit.materialscreens.Acourse;
+import com.codename1.uikit.materialscreens.AddCourse;
 import com.codename1.uikit.materialscreens.Browser;
-import com.codename1.uikit.materialscreens.KitchenSink;
-import com.codename1.uikit.materialscreens.LoginForm;
 import com.codename1.uikit.materialscreens.WelcomeParent;
 import com.codename1.uikit.materialscreens.WelcomePupil;
 import com.codename1.uikit.materialscreens.WelcomeTeacher;
 import com.codename1.uikit.materialscreens.entity.Course;
 import com.esprit.binder.utils.Statics;
 import java.util.ArrayList;
-import java.util.Map;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -323,17 +317,26 @@ public class CourseDAO {
                 
                 listOfCourses.setLayout(new BorderLayout());
                 listOfCourses.add(BorderLayout.CENTER,uiLibsList);
-                listOfCourses.add(BorderLayout.SOUTH,Statics.createBackBtn());
+                
                 tfSearch = new TextField(null, "Tap to search..");
                 listOfCourses.add(BorderLayout.NORTH,tfSearch);
                 tfSearch.addActionListener((ActionListener) (ActionEvent evt) -> {
                     if(tfSearch.getText().length() > 0) {
                     
                 } else {
-                    Dialog.show("Error", "You need to enter a search string", "OK", null);
+                    ToastBar.showErrorMessage("Empty search case...");
                 }
                     
                 });
+                
+                FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+                //fab.addActionListener(e -> ToastBar.showErrorMessage("Not implemented yet..."));
+                
+                fab.addActionListener((ActionListener) (ActionEvent evt) -> {
+                AddCourse addCourseUi = new AddCourse();
+                addCourseUi.show();
+                });
+                fab.bindFabToContainer(listOfCourses.getContentPane());
                 
              
                 

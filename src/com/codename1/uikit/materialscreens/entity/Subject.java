@@ -26,6 +26,12 @@ public class Subject {
         this.classes = classes;
     }
 
+    public Subject(String name, String teachers, String classes) {
+        this.name = name;
+        this.teachers = teachers;
+        this.classes = classes;
+    }
+    
     public int getId() {
         return id;
     }

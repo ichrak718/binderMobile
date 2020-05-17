@@ -16,8 +16,9 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
-import com.codename1.uikit.materialscreens.entity.Course;
-import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.entity.Subject;
+import com.codename1.uikit.materialscreens.service.SubjectDAO;
+import static com.codename1.uikit.materialscreens.service.SubjectDAO.listOfSubjects;
 
 import com.esprit.binder.utils.Statics;
 
@@ -70,9 +71,13 @@ public class AddSubject extends Form{
         backBtn = Statics.createBackBtn(); 
         mainContainer.add(backBtn);
         addBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
-            // add a book
-            Course typedCourse = new Course(tfName.getText(),tfTeachers.getText(),tfClasses.getText());
-            new  CourseDAO().addCourse(typedCourse);
+            // add a course
+           
+            Subject typedSubject = new Subject(tfName.getText(),tfTeachers.getText(),tfClasses.getText());
+            new  SubjectDAO().addSubject(typedSubject);
+            });
+        backBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
+            listOfSubjects.showBack();
             });
         this.add(BorderLayout.NORTH, mainContainer);
    }

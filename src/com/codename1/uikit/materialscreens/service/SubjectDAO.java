@@ -5,6 +5,7 @@
  */
 package com.codename1.uikit.materialscreens.service;
 
+import com.codename1.components.FloatingActionButton;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.Log;
@@ -19,8 +20,8 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
+import com.codename1.uikit.materialscreens.AddSubject;
 import com.codename1.uikit.materialscreens.Asubject;
-import com.codename1.uikit.materialscreens.Browser;
 import com.codename1.uikit.materialscreens.BrowserSub;
 import com.codename1.uikit.materialscreens.WelcomeParent;
 import com.codename1.uikit.materialscreens.WelcomePupil;
@@ -128,7 +129,7 @@ public class SubjectDAO {
                 
                 listOfSubjects.setLayout(new BorderLayout());
                 listOfSubjects.add(BorderLayout.CENTER,uiLibsList);
-                listOfSubjects.add(BorderLayout.SOUTH,Statics.createBackBtn());
+                
                 tfSearch = new TextField(null, "Tap to search..");
                 listOfSubjects.add(BorderLayout.NORTH,tfSearch);
                 tfSearch.addActionListener((ActionListener) (ActionEvent evt) -> {
@@ -139,6 +140,8 @@ public class SubjectDAO {
                 }
                     
                 });
+                
+                
                 
              
                 
@@ -327,7 +330,14 @@ public class SubjectDAO {
                     
                 });
                 
-             
+             FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+                //fab.addActionListener(e -> ToastBar.showErrorMessage("Not implemented yet..."));
+                
+                fab.addActionListener((ActionListener) (ActionEvent evt) -> {
+                AddSubject addSubjectUi = new AddSubject();
+                addSubjectUi.show();
+                });
+                fab.bindFabToContainer(listOfSubjects.getContentPane());
                 
                 
                 listOfSubjects.show();             
