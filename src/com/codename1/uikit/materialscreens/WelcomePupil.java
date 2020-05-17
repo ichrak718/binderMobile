@@ -133,7 +133,7 @@ public class WelcomePupil extends Form {
         
        
 //****************************************************************
-        setupSideMenu(id_user, fullName, id_class, role);
+        setupSideMenu(id_user, fullName, id_class, role,id);
     }
 
     private void addButtonBottom(Image arrowDown, String text, int color, boolean first) {
@@ -163,7 +163,7 @@ public class WelcomePupil extends Form {
     }
 //*********************************************************************************
 
-    public void setupSideMenu(Integer id, String fullname, Integer id_class, String role) {
+    public void setupSideMenu(Integer id, String fullname, Integer id_class, String role, Integer id_pupil) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -182,6 +182,10 @@ public class WelcomePupil extends Form {
             getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects());
            getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
            
+           getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
+          getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
+         
+           getToolbar().addMaterialCommandToSideMenu(" Subjects", FontImage.MATERIAL_TRENDING_UP, e -> new SubjetService().findAllSubjects(id,role));
            getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(id_class,id,role).show() );
            getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(id_class,id,role).show());
       
@@ -197,10 +201,6 @@ public class WelcomePupil extends Form {
             getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsT());
                        getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
 
-        //      getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
-        //   getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
-         
-             getToolbar().addMaterialCommandToSideMenu(" Subjects", FontImage.MATERIAL_TRENDING_UP, e -> new SubjetService().findAllSubjects(id,role));
            }
         else if (role.equals("a:1:{i:0;s:10:\"ROLE_PARENT\";}")) {
             

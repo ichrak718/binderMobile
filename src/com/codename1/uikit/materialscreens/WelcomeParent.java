@@ -23,13 +23,16 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.activity;
+import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.ClubDAO;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.service.NotificationService;
 import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTeacher;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 import com.codename1.uikit.materialscreens.service.SubjectDAO;
+import com.codename1.uikit.materialscreens.service.SubjetService;
 
 /**
  *
@@ -150,6 +153,10 @@ public class WelcomeParent extends Form {
         getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsP());
         getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id_user,role).show());
         getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id_user, role));
+         // getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
+         // getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
+         
+         //  getToolbar().addMaterialCommandToSideMenu(" Subjects", FontImage.MATERIAL_TRENDING_UP, e -> new SubjetService().findAllSubjects(id,role));
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new LoginForm(res).show());
 
     }

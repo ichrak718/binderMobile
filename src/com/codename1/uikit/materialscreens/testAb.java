@@ -30,7 +30,7 @@ public class testAb extends Form{
      private Label l7;
             
      private final Label l2,l3,l4,l5;
-    private final TextField puplTf,subTf,gpTf,hrTf,nbrTf;
+    private final Label puplTf,subTf,gpTf,hrTf,nbrTf;
     private Container mainContainer;
     private final Button backBtn;
     private Abscense currentAbscense;
@@ -53,17 +53,17 @@ getUnselectedStyle().setFgColor(39321);
         Font  about_font = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
             
         l1.getUnselectedStyle().setFont(l1_font);
-        puplTf = new TextField(pupl); 
+        puplTf = new Label(pupl); 
         l3 = new Label("Subject:");
-        subTf = new TextField(subject);
+        subTf = new Label(subject);
         l4 = new Label("Groupe:");
-        gpTf= new TextField(groupe);
+        gpTf= new Label(groupe);
          l7 = new Label("Date:");
 //       date= new TextField(Dateab);
         l5 = new Label("Hour:");
-        hrTf= new TextField(hour);
+        hrTf= new Label(hour);
        l6 = new Label("Nbr:");
-       nbrTf= new TextField(nb);
+       nbrTf= new Label(nb);
        
         mainContainer.add(l1);
         mainContainer.add(new Label());
