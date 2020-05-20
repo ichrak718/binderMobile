@@ -162,20 +162,6 @@ public class NotificationService {
     // ----------------------------------------------------------------------------------
     
     
-     public void updateNotif(Notification c){
-        connectionRequest = new ConnectionRequest() {
-            
-            @Override
-            protected void postResponse() { 
-                Dialog.show("Done!", "successfully updated", "Ok", null);
-               
-            }
-        };
-       
-        connectionRequest.setUrl("http://localhost/mobile/updatenoti.php?id="+c.getId()+"&category="+c.getCategory()+
-                                "&sender="+c.getSender()+"&receiver="+c.getReceiver()+"&content="+c.getContent());
-         NetworkManager.getInstance().addToQueue(connectionRequest);
-    }
 
     
     

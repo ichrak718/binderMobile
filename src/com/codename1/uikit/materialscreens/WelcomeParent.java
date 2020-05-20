@@ -27,6 +27,7 @@ import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.ClubDAO;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
 import com.codename1.uikit.materialscreens.service.NotificationService;
+import com.codename1.uikit.materialscreens.service.ServiceGradu;
 import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTeacher;
@@ -53,7 +54,7 @@ public class WelcomeParent extends Form {
     activity s;
     private Container mainContainer;
 
-    public WelcomeParent(Integer id, String role, String name, String mail, String phone, String namePupil, Integer id_class,Integer id_user) {
+    public WelcomeParent(Integer id,Integer id_pupil, String role, String name, String mail, String phone, String namePupil, Integer id_class,Integer id_user) {
 
         super(BoxLayout.y());
 
@@ -128,14 +129,14 @@ public class WelcomeParent extends Form {
 
         add(mainContainer);
 
-        setupSideMenu(id, name, id_class, role, mail, phone,id_user);
+        setupSideMenu(id,id_pupil, name, id_class, role, mail, phone,id_user);
 
     }
 
     //f.getToolbar().addCommandToLeftBar(null, theme.getImage("cal_left_arrow.png"), (ev)->{HomeForm h=new HomeForm(theme);
     //});
     // f.setLayout(new BorderLayout());
-    public void setupSideMenu(Integer id, String name, Integer id_class, String role, String mail, String phone,Integer id_user) {
+    public void setupSideMenu(Integer id, Integer id_pupil,String name, Integer id_class, String role, String mail, String phone,Integer id_user) {
 
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
@@ -152,7 +153,11 @@ public class WelcomeParent extends Form {
         getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCoursesP()); 
         getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsP());
         getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id_user,role).show());
+         getToolbar().addMaterialCommandToSideMenu("  Grade", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu(id_pupil,id_user,role));
+        System.out.println(id_pupil);
+        getToolbar().addMaterialCommandToSideMenu("  Statistics", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu().findgradeover10(id_pupil,role,id_user));
         getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id_user, role));
+       
          // getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
          // getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
          

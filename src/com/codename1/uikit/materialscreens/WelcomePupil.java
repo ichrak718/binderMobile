@@ -27,6 +27,7 @@ import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
 import com.codename1.uikit.materialscreens.service.NotificationService;
+import com.codename1.uikit.materialscreens.service.ServiceGradu;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
 import com.codename1.uikit.materialscreens.service.SubjectDAO;
@@ -179,12 +180,15 @@ public class WelcomePupil extends Form {
             getToolbar().addMaterialCommandToSideMenu("  Profile", FontImage.MATERIAL_DASHBOARD, e -> new ServicePupil().ServicePupilR(id, role));
             getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id, role));
             getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCourses());
-            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects());
+            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects(id,role,id_pupil));
            getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
            
            getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
           getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
-         
+          //
+           getToolbar().addMaterialCommandToSideMenu("  Grade", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu(id_pupil,id,role));
+           getToolbar().addMaterialCommandToSideMenu("  Statistics", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu().findgradeover10(id_pupil,role,id));
+           //
            getToolbar().addMaterialCommandToSideMenu(" Subjects", FontImage.MATERIAL_TRENDING_UP, e -> new SubjetService().findAllSubjects(id,role));
            getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(id_class,id,role).show() );
            getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(id_class,id,role).show());

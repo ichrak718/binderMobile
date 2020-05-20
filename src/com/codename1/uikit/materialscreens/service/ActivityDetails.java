@@ -10,10 +10,12 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Form;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.uikit.materialscreens.ActivityForm;
+import com.codename1.uikit.materialscreens.entity.Comment;
 import com.codename1.uikit.materialscreens.entity.activity;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -185,7 +187,19 @@ public class ActivityDetails {
     }
     
         
-    
+    public void addComment(Comment c){
+        connectionRequest=new ConnectionRequest(){
+            @Override
+            protected void postResponse() {
+            
+           Dialog.show("done", "successfully added", "ok",null);
+            }
+        };
+        connectionRequest.setUrl("http://localhost/mobile/addComment.php?content=" + c.getContent()+"id_Activity="+c.getId_Activity());
+         System.out.println(c.getId_Activity());
+        NetworkManager.getInstance().addToQueue(connectionRequest);
+    }
+     
     
     
 }

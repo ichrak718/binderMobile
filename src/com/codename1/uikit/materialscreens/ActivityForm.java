@@ -7,15 +7,21 @@ package com.codename1.uikit.materialscreens;
 
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.MultiButton;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -23,7 +29,11 @@ import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.uikit.materialscreens.entity.activity;
+import com.codename1.uikit.materialscreens.service.AbscenseService;
+import com.codename1.uikit.materialscreens.service.CommentsDetails;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.service.NotificationService;
+import com.codename1.uikit.materialscreens.service.ServiceGradu;
 import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
@@ -135,6 +145,63 @@ public class ActivityForm extends Form {
         mainContainer.add(clubA);
         
         
+        Label comment = new Label("comment:");
+
+        comment.getUnselectedStyle().setFgColor(39321);
+        Font  comment_fontA = Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_MEDIUM);
+        
+        
+        mainContainer.add(comment);
+        
+        
+        TextField tfContent = new TextField("", "content");
+        
+         mainContainer.add(tfContent);
+         
+         Button btnCmnt = new Button("comment here");
+         
+         Button btnShCmnt = new Button("show related comments");
+ 
+        mainContainer.add(btnCmnt);
+        mainContainer.add(btnShCmnt);
+        
+         btnCmnt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                          //Comment c = new Comment(tfContent.getText(),id);
+
+              //  new ActivityDetails().addComment(c);
+                ConnectionRequest connectionRequest;
+               connectionRequest=new ConnectionRequest(){
+            @Override
+            protected void postResponse() {
+            
+           Dialog.show("done", "successfully added", "ok",null);
+            }
+        };
+        connectionRequest.setUrl("http://localhost/mobile/addComment.php?content=" + tfContent.getText().toString()+"&id_Activity="+id);
+                System.out.println(tfContent.getText().toString()+id.toString());
+         //System.out.println(c.getId_Activity());
+        NetworkManager.getInstance().addToQueue(connectionRequest);
+            }
+        });
+        
+         
+         
+          btnShCmnt.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                         
+
+                new CommentsDetails((Integer) id);
+            }
+        });
+        
+        
+        
+        
+        
+        
 
         add(mainContainer);
         
@@ -153,7 +220,7 @@ public class ActivityForm extends Form {
     
 f1.show();
 
-setupSideMenu(id_user, id_class, role);
+setupSideMenu(id_user, id_class, role,id);
     
 }
     
@@ -298,7 +365,7 @@ setupSideMenu();
         return img;
     }
     
-    public void setupSideMenu(Integer id,Integer id_class, String role) {
+    public void setupSideMenu(Integer id,Integer id_class, String role, Integer id_pupil) {
        
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
@@ -316,9 +383,14 @@ setupSideMenu();
             getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(id_class, id, role));
         
             getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCourses());
-            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects());
+            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects(id,role,id_pupil));
             getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(id_class,id,role).show());
-            
+             getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id, role,id_pupil));
+          getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
+           getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCourses());
+            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects(id,role,id_pupil));
+              getToolbar().addMaterialCommandToSideMenu("  Grade", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu(id_pupil,id,role));
+                  getToolbar().addMaterialCommandToSideMenu("  Statistics", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu().findgradeover10(id_pupil,role,id));
            
             getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(id_class,id,role).show() );
            

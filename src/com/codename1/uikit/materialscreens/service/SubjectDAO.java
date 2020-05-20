@@ -69,7 +69,7 @@ public class SubjectDAO {
         connectionRequest.setUrl("http://localhost/binder/removesubject.php?id=" + s.getId());
         NetworkManager.getInstance().addToQueue(connectionRequest);
     }
-    public void findAllSubjects(){
+    public void findAllSubjects(Integer id_user,String role ,Integer id_pupil){
         connectionRequest = new ConnectionRequest() {
         List<Subject> subjects = new ArrayList<>();
             @Override
@@ -105,7 +105,7 @@ public class SubjectDAO {
                 
                 
                 
-                listOfSubjects.getToolbar().addCommandToLeftBar("Return", icon, (e) -> new WelcomePupil(16, "anwar", "02/02/2000", "anwar@gmail.com", "3a26", 16, 16, "a:1:{i:0;s:10:\"ROLE_PUPILS\";}").showBack());
+                listOfSubjects.getToolbar().addCommandToLeftBar("Return", icon, (e) -> new ServicePupil().ServicePupilR(id_user, role));
                 //listOfCourses.getToolbar().addCommandToRightBar("Open", icon2, (e) -> new Browser());
                 com.codename1.ui.List uiLibsList = new com.codename1.ui.List();
                 ArrayList<String> libsNoms = new ArrayList<>();
@@ -210,7 +210,7 @@ public class SubjectDAO {
                 
                 
                 
-                listOfSubjects.getToolbar().addCommandToLeftBar("Return", icon, (e) -> new WelcomeParent(19, "a:1:{i:0;s:10:\"ROLE_PARENT\";}", "parent", "parent@gmail.com", "23056683", "anwar", 19, 19).showBack());
+                listOfSubjects.getToolbar().addCommandToLeftBar("Return", icon, (e) -> new WelcomeParent(19, 37,"a:1:{i:0;s:10:\"ROLE_PARENT\";}", "parent", "parent@gmail.com", "23056683", "anwar", 19, 19).showBack());
                 //listOfCourses.getToolbar().addCommandToRightBar("Open", icon2, (e) -> new Browser());
                 com.codename1.ui.List uiLibsList = new com.codename1.ui.List();
                 ArrayList<String> libsNoms = new ArrayList<>();

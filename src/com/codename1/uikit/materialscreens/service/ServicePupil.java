@@ -98,14 +98,11 @@ public class ServicePupil {
                         p.setBirthday((String) obj.get("birthday"));
                         p.setEmail((String) obj.get("email"));
                         p.setClasses(Integer.parseInt((String) obj.get("classes")));
-
                         p.setUser_id(Integer.parseInt((String) obj.get("id_user")));
 
                     }
                     System.out.println(mail);
-                    new  WelcomeParent(id,role,name,mail,phone,p.getFullname(),p.getClasses(),id_user).show();
-                    
-                    
+                    new  WelcomeParent(id,p.getId(),role,name,mail,phone,p.getFullname(),p.getClasses(),id_user).show();
                     //new ServiceClasses(p.getClasses(), p.getFullname(), p.getBirthday(), p.getEmail(), p.getUser_id(), p.getId(),role);
                     //  new WelcomePupil(p.getId(), p.getFullname(), p.getBirthday(), p.getEmail(), p.getClasses(), p.getUser_id()).show();
 

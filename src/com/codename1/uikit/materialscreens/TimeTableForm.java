@@ -28,7 +28,10 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
+import com.codename1.uikit.materialscreens.service.AbscenseService;
 import com.codename1.uikit.materialscreens.service.CourseDAO;
+import com.codename1.uikit.materialscreens.service.NotificationService;
+import com.codename1.uikit.materialscreens.service.ServiceGradu;
 import com.codename1.uikit.materialscreens.service.ServiceParent;
 import com.codename1.uikit.materialscreens.service.ServicePupil;
 import com.codename1.uikit.materialscreens.service.ServiceTimeTable;
@@ -105,7 +108,7 @@ String maChaine;
                  String result = StringUtil.replaceAll(pdf, "C:\\XAMPP\\htdocs\\", "http://localhost/");
         System.out.println(result+"good");
         pdfBtn.addActionListener(e -> {
-          
+          //   stream = fs.openOutputStream(FileSystemStorage.getInstance().getAppHomePath() + "grades.csv");
             FileSystemStorage fs = FileSystemStorage.getInstance();
             String fileName = fs.getAppHomePath() + "timetable.pdf";
                 Util.downloadUrlToStorage(result, fileName, true);  
@@ -119,7 +122,7 @@ String maChaine;
 
         add(mainContainer);
 //****************************************************************
-        setupSideMenu(id, id_user, class_id, role);
+        setupSideMenu(id, id_user, class_id, role,id);
     }
     
 
@@ -150,7 +153,7 @@ String maChaine;
     }
 //*********************************************************************************
 
-    public void setupSideMenu(Integer id, Integer id_user, Integer class_id, String role) {
+    public void setupSideMenu(Integer id, Integer id_user, Integer class_id, String role, Integer id_pupil) {
         Image profilePic = res.getImage("user.jpg");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
@@ -168,10 +171,17 @@ String maChaine;
             getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));
           
             getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCourses());
-            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects());
-            getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());     
+            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects(id,role,id_pupil));
+            getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id,role).show());    
+              
+           getToolbar().addMaterialCommandToSideMenu("  Notification", FontImage.MATERIAL_TRENDING_UP, e -> new NotificationService().findAllNotificationsiD(id_user, role,id_pupil));
+          getToolbar().addMaterialCommandToSideMenu(" Abscenses", FontImage.MATERIAL_TRENDING_UP, e -> new AbscenseService().findAbscensesiD(id, role,id_pupil));
+           getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCourses());
+            getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjects(id_user,role,id_pupil));
            
             getToolbar().addMaterialCommandToSideMenu(" signUp", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ClubSignUp(class_id,id_user,role).show() );
+              getToolbar().addMaterialCommandToSideMenu("  Grade", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu(id_pupil,id,role));
+           getToolbar().addMaterialCommandToSideMenu("  Statistics", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu().findgradeover10(id_pupil,role,id));
            
             getToolbar().addMaterialCommandToSideMenu(" opinion",  FontImage.MATERIAL_MAIL,  e -> new Opinion(class_id,id_user,role).show());
  }
@@ -182,7 +192,10 @@ String maChaine;
       getToolbar().addMaterialCommandToSideMenu(" Profil", FontImage.MATERIAL_TOYS, e -> new ServiceParent().ServiceParent(id_user, role));
       getToolbar().addMaterialCommandToSideMenu(" Course", FontImage.MATERIAL_SAVE,e->new CourseDAO().findAllCoursesP());  
       getToolbar().addMaterialCommandToSideMenu(" Subject", FontImage.MATERIAL_SUBJECT,e->new SubjectDAO().findAllSubjectsP());
+             getToolbar().addMaterialCommandToSideMenu("  Grade", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu(id_user,id_pupil,role));
+        getToolbar().addMaterialCommandToSideMenu("  Statistics", FontImage.MATERIAL_ACCESS_TIME,  e -> new ServiceGradu().findgradeover10(id_user,role,id_pupil));
       getToolbar().addMaterialCommandToSideMenu(" club", FontImage.MATERIAL_TOYS,e->new ClubForm().getForm(class_id,id_user,role).show());
+    
         
       getToolbar().addMaterialCommandToSideMenu("  Time Table", FontImage.MATERIAL_TRENDING_UP, e -> new ServiceTimeTable(class_id, id_user, role));       
   }

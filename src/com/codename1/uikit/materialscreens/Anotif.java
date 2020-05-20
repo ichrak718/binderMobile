@@ -46,7 +46,7 @@ public class Anotif extends Form {
     private final Label l1,l2,l3,l4,l5;
     private final TextField categoryTf,senderTf,receiverTf,contentTf;
     private final Container mainContainer;
-    private final Button editBtn,removeBtn;
+    private final Button removeBtn;
     private Button  backBtn;
    // private Notification currentNotification;
    private Notification currentNotification;
@@ -70,8 +70,7 @@ public class Anotif extends Form {
        receiverTf= new TextField(receiver);
         l5 = new Label("Content:");
         contentTf= new TextField(content);
-        editBtn= new Button("Edit");
-        editBtn.getUnselectedStyle().setFgColor(5542241);
+      
         removeBtn= new Button("Remove");
         removeBtn.getUnselectedStyle().setFgColor(5542241);
        
@@ -91,7 +90,7 @@ public class Anotif extends Form {
         mainContainer.add(l5);
         
         mainContainer.add(contentTf);
-        mainContainer.add(editBtn);
+      
         mainContainer.add(removeBtn);
         
         backBtn = Statics.createBackBtn(); 
@@ -103,10 +102,7 @@ public class Anotif extends Form {
     
        currentNotification = new Notification( id,categoryTf.getText(), senderTf.getText(), receiverTf.getText(),contentTf.getText());
        //currentNotification = new Notification( category,sender,receiver,content);
-                  editBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
-            new NotificationService().updateNotif(currentNotification);
-      
-            });
+          
        
         
          
@@ -152,8 +148,7 @@ public class Anotif extends Form {
        receiverTf= new TextField(receiver);
         l5 = new Label("Content:");
         contentTf= new TextField(content);
-        editBtn= new Button("Edit");
-        editBtn.getUnselectedStyle().setFgColor(5542241);
+      
         removeBtn= new Button("Remove");
         removeBtn.getUnselectedStyle().setFgColor(5542241);
        
@@ -173,7 +168,7 @@ public class Anotif extends Form {
         mainContainer.add(l5);
         
         mainContainer.add(contentTf);
-        mainContainer.add(editBtn);
+      
         mainContainer.add(removeBtn);
         
         backBtn = Statics.createBackBtn(); 
@@ -185,10 +180,7 @@ public class Anotif extends Form {
     
        currentNotification = new Notification( id,categoryTf.getText(), senderTf.getText(), receiverTf.getText(),contentTf.getText());
        //currentNotification = new Notification( category,sender,receiver,content);
-                  editBtn.addActionListener((ActionListener) (ActionEvent evt) -> {
-            new NotificationService().updateNotif(currentNotification);
-      
-            });
+       
        
         
          

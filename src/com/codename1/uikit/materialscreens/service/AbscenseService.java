@@ -152,7 +152,7 @@ new ServicePupil().ServicePupilR(id_user, role);            }
                 listOfAscenses.show();             
             }
         };
-        connectionRequest.setUrl("http://localhost/mobile/readABS?pupil_id="+id_pupil);
+        connectionRequest.setUrl("http://localhost/mobile/readABS.php?pupil_id="+id_pupil);
         NetworkManager.getInstance().addToQueue(connectionRequest);
     }
     

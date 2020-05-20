@@ -18,6 +18,17 @@ public class Pupils {
   private String birthday;
   private int classes;
   private int user_id;
+  private int parent_id;
+
+    public Pupils(Integer id, String fullname, String email, String birthday, int classes, int user_id, int parent_id) {
+        this.id = id;
+        this.fullname = fullname;
+        this.email = email;
+        this.birthday = birthday;
+        this.classes = classes;
+        this.user_id = user_id;
+        this.parent_id = parent_id;
+    }
   
   
 
@@ -26,6 +37,14 @@ public class Pupils {
 
     public Pupils(String email) {
         this.email = email;
+    }
+
+    public int getParent_id() {
+        return parent_id;
+    }
+
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
     
     
@@ -124,8 +143,10 @@ public class Pupils {
 
     @Override
     public String toString() {
-        return "Pupils{" + "id=" + id + ", fullname=" + fullname + ", email=" + email + ", birthday=" + birthday + ", classes=" + classes + ", user_id=" + user_id + '}';
+        return "Pupils{" + "id=" + id + ", fullname=" + fullname + ", email=" + email + ", birthday=" + birthday + ", classes=" + classes + ", user_id=" + user_id + ", parent_id=" + parent_id + '}';
     }
+
+   
 
     
 

@@ -48,13 +48,9 @@ public class ClubDAO {
         connectionRequest=new ConnectionRequest(){
             @Override
             protected void postResponse() {
-            Dialog d = new Dialog("Add to my particpation shelf");
-            TextArea popupBody = new TextArea("member successfully added");
-            popupBody.setUIID("PopupBody");
-            popupBody.setEditable(false);
-            d.setLayout(new BorderLayout());
-            d.add(BorderLayout.CENTER, popupBody);
-            d.showDialog();
+       
+            Dialog.show("success", "", "Ok", null);
+           
             }
         };
         connectionRequest.setUrl("http://localhost/mobile/participation.php?name=" + p.getName() + "&classe=" + p.getClasse()+"&club="+p.getClub());
